@@ -29,35 +29,43 @@ const Index = () => {
   const [riskData, setRiskData] = useState<RiskData | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const analyzeLocation = (lat: number, lng: number) => {
+  const analyzeLocation = async (lat: number, lng: number) => {
     setIsAnalyzing(true);
-    toast.info("Analyzing location...");
+    toast.info("Analyzing location with real-time data...");
     
-    // Simulate API call with random risk scores
-    setTimeout(() => {
-      const generateScore = () => Math.floor(Math.random() * 100);
-      
-      const factors = {
-        flood: generateScore(),
-        wildfire: generateScore(),
-        storm: generateScore(),
-        drought: generateScore(),
-      };
-      
-      const overallScore = Math.floor(
-        Object.values(factors).reduce((a, b) => a + b, 0) / 4
+    try {
+      // Call the backend function to get real climate data
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-location`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ latitude: lat, longitude: lng }),
+        }
       );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch risk data');
+      }
+
+      const data = await response.json();
       
       setRiskData({
-        latitude: lat,
-        longitude: lng,
-        overallScore,
-        factors,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        overallScore: data.overallScore,
+        factors: data.factors,
       });
       
       setIsAnalyzing(false);
-      toast.success("Analysis complete!");
-    }, 2000);
+      toast.success("Real-time analysis complete!");
+    } catch (error) {
+      console.error('Error analyzing location:', error);
+      setIsAnalyzing(false);
+      toast.error("Failed to analyze location. Please try again.");
+    }
   };
 
   const handleBackToHome = () => {
