@@ -61,13 +61,22 @@ serve(async (req) => {
           urbanization: distanceFactor > 0.6 ? 'Urban' : distanceFactor > 0.3 ? 'Suburban' : 'Rural',
         };
         
-        // Calculate payout estimates based on risk
-        const baseExposure = 1000000;
+        // Calculate payout estimates based on risk and demographics
+        // Base exposure varies with population density and urbanization
+        const densityMultiplier = Math.min(populationDensity / 1000, 2.5);
+        const urbanMultiplier = demographics.urbanization === 'Urban' ? 1.5 : 
+                                demographics.urbanization === 'Suburban' ? 1.2 : 0.8;
+        const baseExposure = 1000000 * densityMultiplier * urbanMultiplier;
+        
+        // Risk-adjusted payout calculation with exponential scaling for high risks
+        const riskFactor = gridRisk / 100;
+        const exponentialRisk = Math.pow(riskFactor, 1.2); // Exponential scaling for severity
+        
         const payoutEstimate = {
-          expected: Math.floor(baseExposure * (gridRisk / 100) * 0.75),
-          percentile75: Math.floor(baseExposure * (gridRisk / 100)),
-          percentile90: Math.floor(baseExposure * (gridRisk / 100) * 1.35),
-          worstCase: Math.floor(baseExposure * (gridRisk / 100) * 1.8),
+          expected: Math.floor(baseExposure * exponentialRisk * 0.6),
+          percentile75: Math.floor(baseExposure * exponentialRisk * 0.85),
+          percentile90: Math.floor(baseExposure * exponentialRisk * 1.15),
+          worstCase: Math.floor(baseExposure * exponentialRisk * 1.65),
         };
         
         riskGrid.push({

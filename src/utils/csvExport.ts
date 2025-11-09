@@ -11,12 +11,15 @@ interface RiskData {
 }
 
 export const downloadCSV = (riskData: RiskData) => {
-  // Calculate payout estimates
-  const baseExposure = 1000000;
-  const percentile25 = Math.floor(baseExposure * (riskData.overallScore / 100) * 0.5);
-  const percentile50 = Math.floor(baseExposure * (riskData.overallScore / 100) * 0.75);
-  const percentile75 = Math.floor(baseExposure * (riskData.overallScore / 100));
-  const worstCase = Math.floor(baseExposure * (riskData.overallScore / 100) * 1.5);
+  // Calculate payout estimates with exponential risk scaling
+  const baseExposure = 2500000; // Increased base for aggregate portfolio exposure
+  const riskFactor = riskData.overallScore / 100;
+  const exponentialRisk = Math.pow(riskFactor, 1.2); // Exponential scaling matches demographics function
+  
+  const expected = Math.floor(baseExposure * exponentialRisk * 0.6);
+  const percentile75 = Math.floor(baseExposure * exponentialRisk * 0.85);
+  const percentile90 = Math.floor(baseExposure * exponentialRisk * 1.15);
+  const worstCase = Math.floor(baseExposure * exponentialRisk * 1.65);
 
   const csvContent = [
     ['Metric', 'Value'],
@@ -27,10 +30,10 @@ export const downloadCSV = (riskData: RiskData) => {
     ['Wildfire Risk (%)', riskData.factors.wildfire],
     ['Storm Risk (%)', riskData.factors.storm],
     ['Drought Risk (%)', riskData.factors.drought],
-    ['Payout 25th Percentile ($)', percentile25],
-    ['Payout 50th Percentile ($)', percentile50],
+    ['Expected Annual Loss ($)', expected],
     ['Payout 75th Percentile ($)', percentile75],
-    ['Worst-Case Exposure ($)', worstCase],
+    ['Payout 90th Percentile ($)', percentile90],
+    ['Probable Maximum Loss ($)', worstCase],
   ]
     .map(row => row.join(','))
     .join('\n');
