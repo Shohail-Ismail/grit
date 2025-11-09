@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
 import LocationInput from "@/components/LocationInput";
 import RiskScoreDisplay from "@/components/RiskScoreDisplay";
-import RiskFactorCard from "@/components/RiskFactorCard";
+import InteractiveRiskCard from "@/components/InteractiveRiskCard";
 import RiskMap from "@/components/RiskMap";
 import RiskChart from "@/components/RiskChart";
-import KPISection from "@/components/KPISection";
+import InteractiveKPISection from "@/components/InteractiveKPISection";
+import TransparencyPanel from "@/components/TransparencyPanel";
 import Footer from "@/components/Footer";
 import { downloadCSV } from "@/utils/csvExport";
 import { toast } from "sonner";
@@ -97,7 +98,8 @@ const Index = () => {
                   </p>
                 </div>
                 
-                <div className="flex gap-3">
+                <div className="flex gap-3 flex-wrap">
+                  <TransparencyPanel />
                   <Button 
                     variant="outline" 
                     onClick={handleBackToHome}
@@ -145,34 +147,42 @@ const Index = () => {
               </h3>
               
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                <RiskFactorCard
+                <InteractiveRiskCard
                   title="Flood Risk"
                   score={riskData.factors.flood}
                   icon={Droplets}
                   description="Water-related hazards"
+                  explanation="Flood risk measures how likely the area is to experience water-related disasters based on elevation, soil saturation, proximity to water bodies, and historical flood events. It considers factors like drainage capacity and topographic vulnerability."
+                  transparencyNote="This score is based on open Earth observation data including elevation models, soil moisture data, and historical flood records. No personal or sensitive information is used."
                 />
-                <RiskFactorCard
+                <InteractiveRiskCard
                   title="Wildfire Risk"
                   score={riskData.factors.wildfire}
                   icon={Flame}
                   description="Fire danger assessment"
+                  explanation="Wildfire risk assesses the likelihood of fire hazards based on vegetation density, dryness levels, historical fire patterns, temperature trends, and proximity to fire-prone areas. It includes both natural and human-caused fire susceptibility."
+                  transparencyNote="Derived from satellite vegetation indices, climate data, and fire history databases. All data sources are publicly available environmental monitoring systems."
                 />
-                <RiskFactorCard
+                <InteractiveRiskCard
                   title="Storm Risk"
                   score={riskData.factors.storm}
                   icon={Wind}
                   description="Severe weather patterns"
+                  explanation="Storm risk evaluates exposure to severe weather including hurricanes, tornadoes, severe thunderstorms, and high wind events. It considers geographic location, historical storm paths, and atmospheric conditions that favor storm development."
+                  transparencyNote="Based on meteorological records, storm tracking data, and climate pattern analysis from open weather databases and atmospheric research data."
                 />
-                <RiskFactorCard
+                <InteractiveRiskCard
                   title="Drought Risk"
                   score={riskData.factors.drought}
                   icon={Sun}
                   description="Water scarcity potential"
+                  explanation="Drought risk measures water scarcity potential by analyzing precipitation patterns, soil moisture levels, temperature trends, and water resource availability. It considers both short-term dry periods and long-term aridification trends."
+                  transparencyNote="Calculated using precipitation data, soil moisture sensors, and water resource databases. All measurements come from open environmental monitoring networks."
                 />
               </div>
             </section>
 
-            <KPISection overallScore={riskData.overallScore} />
+            <InteractiveKPISection overallScore={riskData.overallScore} />
           </>
         )}
       </main>

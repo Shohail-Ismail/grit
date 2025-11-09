@@ -8,9 +8,13 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
       
       <div className="container relative mx-auto px-4 py-20 md:py-28">
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            GeoRisk
+          <h1 className="mb-3 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            GRIT
           </h1>
+          
+          <p className="mb-2 text-lg text-primary-foreground/80 md:text-xl font-medium tracking-wide">
+            Geographical Risk Insurance Tool
+          </p>
           
           <p className="mb-10 text-xl text-primary-foreground/90 md:text-2xl font-light">
             Instant climate risk insights for any location

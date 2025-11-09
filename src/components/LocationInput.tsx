@@ -59,6 +59,10 @@ const LocationInput = ({ onAnalyze }: LocationInputProps) => {
           <h3 className="font-semibold text-card-foreground">Enter Location</h3>
         </div>
         
+        <p className="text-sm text-muted-foreground mb-4">
+          Enter a location anywhere on Earth to analyze climate-related risk factors.
+        </p>
+        
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="latitude">Latitude</Label>
