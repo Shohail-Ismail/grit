@@ -38,6 +38,12 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
     
+    --chart-1: 200 80% 50%;
+    --chart-2: 15 85% 55%;
+    --chart-3: 220 70% 55%;
+    --chart-4: 45 90% 60%;
+    --chart-5: 27 87% 67%;
+    
     /* Risk level colors */
     --risk-low: 160 65% 45%;
     --risk-medium: 45 95% 55%;

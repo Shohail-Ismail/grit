@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Mountain, Droplets, Leaf, Waves, Wind, AlertTriangle } from "lucide-react";
+import { Droplets, Flame, Wind, Sun, Download, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
 import LocationInput from "@/components/LocationInput";
 import RiskScoreDisplay from "@/components/RiskScoreDisplay";
 import RiskFactorCard from "@/components/RiskFactorCard";
 import RiskMap from "@/components/RiskMap";
+import RiskChart from "@/components/RiskChart";
+import KPISection from "@/components/KPISection";
+import Footer from "@/components/Footer";
+import { downloadCSV } from "@/utils/csvExport";
 import { toast } from "sonner";
 
 interface RiskData {
@@ -12,12 +17,10 @@ interface RiskData {
   longitude: number;
   overallScore: number;
   factors: {
-    terrain: number;
-    disasters: number;
-    soilMoisture: number;
-    vegetation: number;
-    seaLevel: number;
-    storms: number;
+    flood: number;
+    wildfire: number;
+    storm: number;
+    drought: number;
   };
 }
 
@@ -34,16 +37,14 @@ const Index = () => {
       const generateScore = () => Math.floor(Math.random() * 100);
       
       const factors = {
-        terrain: generateScore(),
-        disasters: generateScore(),
-        soilMoisture: generateScore(),
-        vegetation: generateScore(),
-        seaLevel: generateScore(),
-        storms: generateScore(),
+        flood: generateScore(),
+        wildfire: generateScore(),
+        storm: generateScore(),
+        drought: generateScore(),
       };
       
       const overallScore = Math.floor(
-        Object.values(factors).reduce((a, b) => a + b, 0) / 6
+        Object.values(factors).reduce((a, b) => a + b, 0) / 4
       );
       
       setRiskData({
@@ -58,6 +59,18 @@ const Index = () => {
     }, 2000);
   };
 
+  const handleBackToHome = () => {
+    setRiskData(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleDownload = () => {
+    if (riskData) {
+      downloadCSV(riskData);
+      toast.success("Report downloaded successfully!");
+    }
+  };
+
   const scrollToAnalysis = () => {
     document.getElementById("analysis-section")?.scrollIntoView({ 
       behavior: "smooth" 
@@ -65,10 +78,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Hero onGetStarted={scrollToAnalysis} />
       
-      <main className="container mx-auto px-4 py-12 space-y-12">
+      <main className="container mx-auto px-4 py-12 space-y-12 flex-1">
         <section id="analysis-section" className="max-w-4xl mx-auto">
           <LocationInput onAnalyze={analyzeLocation} />
         </section>
@@ -76,11 +89,31 @@ const Index = () => {
         {riskData && (
           <>
             <section className="max-w-6xl mx-auto space-y-8">
-              <div className="text-center space-y-2">
-                <h2 className="text-3xl font-bold text-foreground">Risk Assessment Results</h2>
-                <p className="text-muted-foreground">
-                  Comprehensive analysis based on multiple environmental factors
-                </p>
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="text-center space-y-2 flex-1">
+                  <h2 className="text-3xl font-bold text-foreground">Risk Assessment Results</h2>
+                  <p className="text-muted-foreground">
+                    Comprehensive analysis based on climate risk factors
+                  </p>
+                </div>
+                
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    onClick={handleBackToHome}
+                    className="gap-2"
+                  >
+                    <Home className="h-4 w-4" />
+                    Back to Home
+                  </Button>
+                  <Button 
+                    onClick={handleDownload}
+                    className="gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download Results
+                  </Button>
+                </div>
               </div>
               
               <div className="grid gap-6 lg:grid-cols-3">
@@ -102,53 +135,49 @@ const Index = () => {
               </div>
             </section>
 
+            <section className="max-w-6xl mx-auto">
+              <RiskChart factors={riskData.factors} />
+            </section>
+
             <section className="max-w-6xl mx-auto space-y-6">
               <h3 className="text-2xl font-bold text-foreground text-center">
-                Risk Factor Breakdown
+                Risk Factor Summary
               </h3>
               
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <RiskFactorCard
-                  title="Terrain Risk"
-                  score={riskData.factors.terrain}
-                  icon={Mountain}
-                  description="Elevation & topography analysis"
-                />
-                <RiskFactorCard
-                  title="Historic Disasters"
-                  score={riskData.factors.disasters}
-                  icon={AlertTriangle}
-                  description="Past hazard occurrences"
-                />
-                <RiskFactorCard
-                  title="Soil Moisture"
-                  score={riskData.factors.soilMoisture}
+                  title="Flood Risk"
+                  score={riskData.factors.flood}
                   icon={Droplets}
-                  description="Ground saturation levels"
+                  description="Water-related hazards"
                 />
                 <RiskFactorCard
-                  title="Vegetation Health"
-                  score={riskData.factors.vegetation}
-                  icon={Leaf}
-                  description="Dryness & fire risk index"
+                  title="Wildfire Risk"
+                  score={riskData.factors.wildfire}
+                  icon={Flame}
+                  description="Fire danger assessment"
                 />
                 <RiskFactorCard
-                  title="Sea Level Rise"
-                  score={riskData.factors.seaLevel}
-                  icon={Waves}
-                  description="Coastal flooding potential"
-                />
-                <RiskFactorCard
-                  title="Storm Patterns"
-                  score={riskData.factors.storms}
+                  title="Storm Risk"
+                  score={riskData.factors.storm}
                   icon={Wind}
-                  description="Severe weather likelihood"
+                  description="Severe weather patterns"
+                />
+                <RiskFactorCard
+                  title="Drought Risk"
+                  score={riskData.factors.drought}
+                  icon={Sun}
+                  description="Water scarcity potential"
                 />
               </div>
             </section>
+
+            <KPISection overallScore={riskData.overallScore} />
           </>
         )}
       </main>
+      
+      <Footer />
     </div>
   );
 };

@@ -8,19 +8,12 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
       
       <div className="container relative mx-auto px-4 py-20 md:py-28">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 px-4 py-2 backdrop-blur-sm">
-            <Shield className="h-4 w-4" />
-            <span className="text-sm font-medium">Environmental Risk Intelligence</span>
-          </div>
-          
-          <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Assess Climate & Disaster Risk
-            <span className="block text-primary-foreground/90">For Any Location</span>
+          <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            GeoRisk
           </h1>
           
-          <p className="mb-10 text-lg text-primary-foreground/80 md:text-xl">
-            Comprehensive risk analysis using terrain data, historic disasters, soil moisture, 
-            vegetation health, sea-level rise, and storm patterns to protect your assets.
+          <p className="mb-10 text-xl text-primary-foreground/90 md:text-2xl font-light">
+            Instant climate risk insights for any location
           </p>
           
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -30,14 +23,7 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
               className="group h-12 gap-2 bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <MapPin className="h-5 w-5 transition-transform group-hover:scale-110" />
-              Analyze Location
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="h-12 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 hover:border-primary-foreground/50 backdrop-blur-sm"
-            >
-              View Demo
+              Generate Risk Report
             </Button>
           </div>
         </div>
