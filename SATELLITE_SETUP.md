@@ -187,28 +187,58 @@ NBR quantifies vegetation health and burn severity using multispectral bands:
 
 **Why NBR?** Sensitive to vegetation changes caused by fire, validated by USGS research.
 
-The system is designed to work with Copernicus Data Space Ecosystem (free, no API limits):
+## Data Source: Copernicus Data Space Ecosystem
+
+The system integrates with **Copernicus Data Space Ecosystem** (free, no API limits):
 
 - **API Endpoint**: `https://dataspace.copernicus.eu/`
-- **Authentication**: OAuth2 (requires registration at https://dataspace.copernicus.eu/)
-- **Data**: Sentinel-1 & Sentinel-2 satellite imagery
+- **Authentication**: OAuth2 client credentials flow
+- **STAC API**: `https://catalogue.dataspace.copernicus.eu/stac/` for product discovery
+- **Data**: Sentinel-1 GRD (SAR) & Sentinel-2 L2A (multispectral) imagery
 - **Update Frequency**: Multiple times per day depending on location
 - **Coverage**: Global
 
-### Current Implementation
-For MVP purposes, the system generates **realistic simulated data** based on:
-- Location characteristics
-- Climate patterns
-- Elevation data
-- Historical risk patterns
+### Copernicus Setup (Required for Real Data)
 
-### Production Migration
-To use real Copernicus data:
-1. Register at https://dataspace.copernicus.eu/
-2. Add Copernicus OAuth credentials as Supabase secrets:
-   - `COPERNICUS_CLIENT_ID`
-   - `COPERNICUS_CLIENT_SECRET`
-3. Update the `getCopernicusToken()` function in `ingest-satellite-data/index.ts`
+To use real Copernicus satellite data:
+
+1. **Register at Copernicus Data Space**
+   - Visit: https://dataspace.copernicus.eu/
+   - Create a free account
+   - No credit card required
+
+2. **Create OAuth Credentials**
+   - Log in to your Copernicus account
+   - Navigate to: User Settings → Security → OAuth Clients
+   - Create new OAuth client with "Client Credentials" grant type
+   - Save your Client ID and Client Secret
+
+3. **Configure Secrets** (Already Done ✅)
+   - `COPERNICUS_CLIENT_ID` - Your OAuth client ID
+   - `COPERNICUS_CLIENT_SECRET` - Your OAuth client secret
+   - These have been added to your project secrets
+
+### How It Works
+
+**Authentication Flow:**
+1. Edge function requests OAuth token using client credentials
+2. Token is used for STAC API searches and data access
+3. Token expires after ~10 minutes, automatically refreshed on next run
+
+**Data Discovery with STAC:**
+- Searches for Sentinel-1 GRD products (Interferometric Wide swath mode)
+- Searches for Sentinel-2 L2A products (max 30% cloud cover)
+- Returns product IDs, acquisition times, and metadata
+- Automatically selects best available imagery for analysis
+
+**Current Implementation:**
+The system now uses **real Copernicus STAC API** to:
+- Authenticate via OAuth2
+- Search for actual Sentinel-1 and Sentinel-2 products
+- Extract real product metadata (acquisition times, cloud cover, orbit data)
+- Use metadata to inform simulated band data generation
+
+**Note:** Full satellite imagery download and processing requires additional geospatial libraries (GDAL, rasterio) not available in edge functions. The current implementation uses real product discovery with realistic data generation based on actual satellite pass characteristics.
 
 ## Database Schema
 
@@ -351,11 +381,11 @@ Monitor edge function logs in Lovable Cloud dashboard to see:
 
 ## Future Enhancements
 
-- [ ] Real Copernicus API OAuth integration (requires COPERNICUS_CLIENT_ID and COPERNICUS_CLIENT_SECRET secrets)
-- [ ] Actual STAC API queries for Sentinel-1 GRD and Sentinel-2 L2A products
-- [ ] True GeoTIFF generation using geotiff.js or GDAL
-- [ ] Proper Shapefile generation (currently outputs GeoJSON)
+- [ ] Full satellite imagery download and band processing (requires GDAL/rasterio)
+- [ ] Direct GeoTIFF generation from actual satellite bands
+- [ ] Cloud masking and atmospheric correction
 - [ ] Time-series analysis for historical trends
 - [ ] Automated alerts when significant changes are detected
 - [ ] Integration with other satellites (MODIS, Landsat)
 - [ ] Machine learning models for risk prediction
+- [ ] Web-based GIS viewer for interactive analysis
