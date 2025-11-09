@@ -61,12 +61,12 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
           
           {/* Stats or feature highlights */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-fade-in">
-            {[
-              { label: "Risk Factors", value: "4" },
-              { label: "Data Points", value: "100+" },
-              { label: "Global Coverage", value: "100%" },
-              { label: "AI Transparency", value: "Full" }
-            ].map((stat, i) => (
+          {[
+            { label: "Risk Parameters", value: "50+" },
+            { label: "Peril Categories", value: "12+" },
+            { label: "Global Coverage", value: "100%" },
+            { label: "Model Transparency", value: "Full" }
+          ].map((stat, i) => (
               <div 
                 key={i} 
                 className="backdrop-blur-md bg-white/10 rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
