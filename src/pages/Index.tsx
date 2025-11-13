@@ -51,13 +51,14 @@ const Index = () => {
     toast.info("Analyzing location with real-time data...");
     
     try {
-      // Call the public backend function without authentication
+      // Call the public backend function with anon key
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-location`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
           body: JSON.stringify({ latitude: lat, longitude: lng }),
         }
