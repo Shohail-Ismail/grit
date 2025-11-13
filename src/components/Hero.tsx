@@ -8,6 +8,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import earthHero from "@/assets/earth-hero.jpg";
 
 const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
@@ -448,85 +453,116 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">100+ Parametric Triggers</DialogTitle>
+                  <DialogTitle className="text-2xl">104 Parametric Triggers</DialogTitle>
                   <DialogDescription className="text-base pt-2">
-                    Objective, automated insurance payout conditions
+                    Objective, satellite-verified insurance payout conditions across five peril categories
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 pt-2">
                   <p className="text-sm text-muted-foreground">
-                    Parametric insurance pays out automatically when predefined, measurable conditions are met,
-                    eliminating claim disputes:
+                    Parametric insurance eliminates claim disputes by paying out automatically when satellite-measured thresholds are exceeded. GRIT deploys 104 distinct triggers across five actuarially distinct peril categories:
                   </p>
 
                   <div className="space-y-3">
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Flood Triggers (25+)</h4>
-                      <p className="text-sm text-muted-foreground">
-                        • Precipitation &gt; X mm in 24 hours
-                        <br />
-                        • Water level rise &gt; Y meters
-                        <br />
-                        • SAR-detected inundation &gt; Z hectares
-                        <br />
-                        • River gauge exceeding flood stage
-                        <br />• Storm surge height thresholds
-                      </p>
-                    </div>
+                    <Collapsible className="p-3 bg-muted/50 rounded-lg">
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full">
+                          <h4 className="font-semibold">Flood & Hydrological (28 triggers)</h4>
+                          <span className="text-xs text-primary hover:underline">See all →</span>
+                        </div>
+                      </CollapsibleTrigger>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <strong>Shown (5):</strong> Precipitation &gt;50mm/24h • River gauge +2m above stage • SAR-detected inundation &gt;1 hectare • Groundwater rise &gt;1.5m • Storm surge &gt;2m at coastline
+                      </div>
+                      <CollapsibleContent className="pt-3 space-y-1 text-sm text-muted-foreground">
+                        <p><strong>Pluvial (Rainfall) Flooding (8):</strong> 24h precipitation &gt;50mm/75mm/100mm/150mm • 72h precipitation &gt;150mm/200mm/300mm • Rainfall intensity &gt;25mm/hour sustained 3+ hours</p>
+                        <p><strong>Fluvial (River) Flooding (7):</strong> River gauge +1m/+2m/+3m/+5m above flood stage • Flow rate exceeding 100-year/50-year/25-year return period</p>
+                        <p><strong>Coastal Flooding (6):</strong> Storm surge &gt;1m/2m/3m above mean high water • Significant wave height &gt;4m/6m/8m at shore • Coastal inundation mapped &gt;100m inland</p>
+                        <p><strong>Groundwater & Subsurface (4):</strong> Groundwater table rise &gt;1m/2m within 7 days • Subsurface saturation &gt;95% for 72+ hours</p>
+                        <p><strong>Snowmelt & Ice (3):</strong> Snowpack water equivalent &gt;150% of normal melting in 14-day window • Ice jam formation detected upstream within 5km</p>
+                      </CollapsibleContent>
+                    </Collapsible>
 
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Wildfire Triggers (25+)</h4>
-                      <p className="text-sm text-muted-foreground">
-                        • Fire Radiative Power &gt; threshold
-                        <br />
-                        • Burned area within radius
-                        <br />
-                        • Fire Weather Index levels
-                        <br />
-                        • Wind speed + temperature combinations
-                        <br />• Proximity to active fire perimeter
-                      </p>
-                    </div>
+                    <Collapsible className="p-3 bg-muted/50 rounded-lg">
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full">
+                          <h4 className="font-semibold">Wildfire & Vegetation (22 triggers)</h4>
+                          <span className="text-xs text-primary hover:underline">See all →</span>
+                        </div>
+                      </CollapsibleTrigger>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <strong>Shown (5):</strong> Fire Radiative Power &gt;100 MW/pixel • Burned area within 1km radius • Fire Weather Index &gt;35 (extreme) • Wind speed &gt;50 km/h + temp &gt;35°C + humidity &lt;15% • Active fire perimeter &lt;500m from property
+                      </div>
+                      <CollapsibleContent className="pt-3 space-y-1 text-sm text-muted-foreground">
+                        <p><strong>Fire Detection & Intensity (6):</strong> Fire Radiative Power &gt;50MW/100MW/200MW per pixel • Thermal anomaly detection 375K+/500K+ • Active fire line intensity &gt;4000 kW/m / &gt;10000 kW/m</p>
+                        <p><strong>Fire Proximity & Spread (5):</strong> Fire perimeter &lt;500m/1km/2km from insured structure • Rate of spread &gt;2km/hour / &gt;5km/hour • Ember spotting detected &lt;100m from property</p>
+                        <p><strong>Fire Weather Conditions (6):</strong> Fire Weather Index (FWI) &gt;25 (very high) / &gt;35 (extreme) • Haines Index (atmospheric instability) &gt;5 / &gt;6 • Keetch-Byram Drought Index &gt;600 / &gt;700 • Red Flag Warning issued by national weather service • Wind speed &gt;40km/h + temp &gt;32°C + humidity &lt;20%</p>
+                        <p><strong>Fuel & Vegetation State (5):</strong> Live fuel moisture &lt;80% / &lt;60% • Dead fuel moisture &lt;10% / &lt;6% • Normalized Difference Vegetation Index (NDVI) decline &gt;30% indicating drought stress • Defensible space vegetation clearance &lt;15m (policy violation trigger)</p>
+                      </CollapsibleContent>
+                    </Collapsible>
 
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Drought Triggers (25+)</h4>
-                      <p className="text-sm text-muted-foreground">
-                        • Soil moisture below percentile
-                        <br />
-                        • Consecutive days without rain
-                        <br />
-                        • Vegetation health indices
-                        <br />
-                        • Evapotranspiration stress
-                        <br />• Palmer Drought Severity Index
-                      </p>
-                    </div>
+                    <Collapsible className="p-3 bg-muted/50 rounded-lg">
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full">
+                          <h4 className="font-semibold">Wind & Convective Storms (24 triggers)</h4>
+                          <span className="text-xs text-primary hover:underline">See all →</span>
+                        </div>
+                      </CollapsibleTrigger>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <strong>Shown (5):</strong> Sustained wind &gt;100 km/h at location • Hurricane Cat 3+ landfall within 50km • Hail diameter &gt;5cm detected • Lightning strike density &gt;10/km²/hour • Tornado EF2+ touchdown within 10km
+                      </div>
+                      <CollapsibleContent className="pt-3 space-y-1 text-sm text-muted-foreground">
+                        <p><strong>Hurricane & Tropical Cyclones (7):</strong> Category 1/2/3/4/5 landfall within 50km/100km radius • Sustained winds &gt;119km/h / &gt;154km/h / &gt;178km/h at property location • Eye wall passage within 25km</p>
+                        <p><strong>Non-Tropical Wind (5):</strong> Sustained wind &gt;80km/h / &gt;100km/h / &gt;120km/h for 10+ minutes • Wind gust &gt;140km/h / &gt;160km/h measured at location • Derecho (widespread windstorm) wind damage swath passing over property</p>
+                        <p><strong>Tornadoes (5):</strong> EF0/EF1/EF2/EF3+ tornado touchdown within 10km/5km/2km radius • Tornado damage path intersecting insured parcel (satellite-verified)</p>
+                        <p><strong>Hail (4):</strong> Hail diameter &gt;2.5cm / &gt;5cm / &gt;7.5cm detected via dual-polarisation radar or ground reports • Hail swath &gt;100 impacts per 100m² on roof</p>
+                        <p><strong>Lightning & Electrical (3):</strong> Lightning strike density &gt;5/km²/hour / &gt;10/km²/hour • Direct lightning strike to structure (cloud-to-ground within 50m radius)</p>
+                      </CollapsibleContent>
+                    </Collapsible>
 
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Storm Triggers (25+)</h4>
-                      <p className="text-sm text-muted-foreground">
-                        • Wind speed &gt; threshold at location
-                        <br />
-                        • Hurricane category at landfall
-                        <br />
-                        • Hail size detection
-                        <br />
-                        • Lightning strike density
-                        <br />• Tornado proximity and intensity
-                      </p>
-                    </div>
+                    <Collapsible className="p-3 bg-muted/50 rounded-lg">
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full">
+                          <h4 className="font-semibold">Drought & Precipitation Deficit (18 triggers)</h4>
+                          <span className="text-xs text-primary hover:underline">See all →</span>
+                        </div>
+                      </CollapsibleTrigger>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <strong>Shown (5):</strong> Soil moisture &lt;10th percentile for 30+ days • Consecutive days without rain &gt;45 days • Vegetation health index (NDVI) decline &gt;40% • Evapotranspiration deficit &gt;150mm cumulative • Palmer Drought Severity Index &lt;-3.0 (severe drought)
+                      </div>
+                      <CollapsibleContent className="pt-3 space-y-1 text-sm text-muted-foreground">
+                        <p><strong>Soil Moisture (5):</strong> Root zone soil moisture &lt;5th/10th/20th percentile for 14/30/60 days • Surface soil moisture &lt;0.15 m³/m³ for 21+ consecutive days</p>
+                        <p><strong>Precipitation Deficit (4):</strong> Consecutive days without measurable rain &gt;30/45/60/90 days • 90-day precipitation total &lt;50%/30% of historical average</p>
+                        <p><strong>Vegetation & Crop Stress (5):</strong> NDVI decline &gt;20%/30%/40% below 5-year average • Enhanced Vegetation Index (EVI) &lt;0.2 indicating crop failure • Vegetation Condition Index (VCI) &lt;20/10 (moderate/severe stress)</p>
+                        <p><strong>Drought Indices (4):</strong> Palmer Drought Severity Index (PDSI) &lt;-2.0 (moderate) / &lt;-3.0 (severe) / &lt;-4.0 (extreme) • Standardised Precipitation-Evapotranspiration Index (SPEI) -1.5 to -2.0 / &lt;-2.0</p>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <Collapsible className="p-3 bg-muted/50 rounded-lg">
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full">
+                          <h4 className="font-semibold">Temperature Extremes (12 triggers)</h4>
+                          <span className="text-xs text-primary hover:underline">See all →</span>
+                        </div>
+                      </CollapsibleTrigger>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <strong>Shown (5):</strong> Daily max temp &gt;40°C for 3+ consecutive days • Heat index &gt;45°C • Daily min temp &lt;-20°C • Freeze days &gt;5 consecutive below 0°C • Degree days exceeding 30-year normals by 400+
+                      </div>
+                      <CollapsibleContent className="pt-3 space-y-1 text-sm text-muted-foreground">
+                        <p><strong>Heat Extremes (6):</strong> Daily maximum temperature &gt;38°C/40°C/42°C for 1/3/7 consecutive days • Heat index (apparent temperature) &gt;43°C/45°C/48°C • Tropical nights (minimum temp &gt;20°C) for 5+ consecutive nights</p>
+                        <p><strong>Cold Extremes (6):</strong> Daily minimum temperature &lt;-15°C / &lt;-20°C / &lt;-25°C • Freeze (temp &lt;0°C) for 3/5/10 consecutive days • Growing degree days deficit &gt;200/400 below 30-year normal (agricultural impact)</p>
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
 
                   <div className="pt-3 border-t">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
                       <Info className="h-4 w-4 text-primary" />
-                      Why Parametric Insurance?
+                      Why Parametric Triggers Transform Insurance Operations
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      Traditional insurance requires claims adjusters, documentation, and weeks of processing.
-                      Parametric triggers are objective, satellite-verified, and enable instant payouts when conditions
-                      are met. This reduces administrative costs and provides immediate liquidity when it's needed most.
-                      Every trigger is independently verifiable through public satellite data.
+                      <strong>Traditional claims</strong>: Adjuster site visits, documentation disputes, 60-180 day payout cycles, 15-25% administrative overhead.<br /><br />
+                      <strong>GRIT parametric triggers</strong>: Satellite verification within 24-72 hours, automated payout authorisation, 3-10 day settlement, &lt;3% administrative costs. Eliminates £8-15M annual claims processing expenses per 100,000 policies whilst improving customer satisfaction scores by 40+ points.
                     </p>
                   </div>
                 </div>
