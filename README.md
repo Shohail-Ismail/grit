@@ -8,9 +8,16 @@
 
 ## Description
 
-Prototype built in 24 hours using Lovable and Google Cloud for the MIT SloanxOpenAI Hack-Nation Global Hackathon
-- Placed 3rd (VC track) out of >2800 participants
-- Selected as 1 of 15 ventures to receive mentorship from Stanford, Harvard, and Microsoft to develop and scale idea (ongoing)
+Prototype built in 24 hours using Lovable and Google Cloud for [MITxOpenAI Hack-Nation Global](https://hack-nation.ai/):
+   - Try [GRIT]()
+   - Watch 60-sec [demo video](https://drive.google.com/file/d/19i3dSE6TcBiJi3k7GW5UsjtoulMT2fvo/view?usp=drive_link)
+   - Watch 60-sec [tech + reflections](https://drive.google.com/file/d/1Oh1mXkpmszh6UlDXN5WVXPcfjrlZN2Bn/view?usp=drive_link)
+
+**Results**:
+   - Placed [3rd (VC track) out of >2800](https://www.linkedin.com/posts/shohail-ismail_hacknation-mit-openai-activity-7394305524978118656-z1nX?utm_source=share&utm_medium=member_desktop&rcm=ACoAACFbMOkB922BZ9kyXvbVxTlEYv4HhtSH-Iw) participants
+   - Selected as 1 of 15 ventures to receive mentorship from Stanford, Harvard, and Microsoft to develop and scale idea (ongoing)
+
+---
 
 GRIT is a rapid-response climate risk assessment tool for insurance, reinsurance, and catastrophe-modelling teams It delivers sub-10m geospatial analysis, <60-second risk scoring, and parametric payout estimates, combining satellite imagery, climate feeds, and a lightweight geospatial backend
 
@@ -92,50 +99,39 @@ App runs at:
 
 1) Satellite methods are production-aligned
 
-The SAR and NBR pipelines follow standard remote-sensing practice:
+   The SAR and NBR pipelines follow standard remote-sensing practice:
 
-* SAR flood detection
-* NBR/dNBR wildfire classification using USGS thresholds
+   * SAR flood detection
+   * NBR/dNBR wildfire classification using USGS thresholds
 
-These methods are simplified for serverless limits but retain the correct scientific structure
+   These methods are simplified for serverless limits but retain the correct scientific structure
 
 2) Data pipeline designed for real underwriting workflows
 
-* Supabase PostGIS stores analysis results, enabling multi-location queries
-* pg_cron supports scheduled ingestion for near-real-time updates
-* GeoTIFF/Shapefile export allows integration with internal GIS systems
+   * Supabase PostGIS stores analysis results, enabling multi-location queries
+   * pg_cron supports scheduled ingestion for near-real-time updates
+   * GeoTIFF/Shapefile export allows integration with internal GIS systems
 
 3) Scoring model intentionally transparent
 
-Recruiters and risk teams favour explainability over black box ML
-GRIT uses clear, auditable components:
+   Risk teams favour explainability over black box ML. GRIT uses clear, auditable components:
 
-* 7 hazard metrics
-* demographic-weighted exposure
-* exponential severity scaling (`riskFactor^12`)
-* percentile-based payout estimates
+      * 7 hazard metrics
+      * demographic-weighted exposure
+      * exponential severity scaling (`riskFactor^12`)
+      * percentile-based payout estimates
 
 4) Built for speed, reliability, and handover
 
-During the hackathon, major constraints included:
-
-* no GDAL
-* strict serverless timeouts
-* unpredictable API rates
-
-The solution is in:
-
-* lightweight GeoTIFF generation
-* request batching (85% fewer calls)
-* clean modular edge functions suitable for rewrite/re-deployment
+   During the hackathon, major constraints included no GDAL (unified geospatial data format), strict serverless timeouts, unpredictable API rates, and messy code. Current solution directions include lightweight GeoTIFF generation, request batching (85% fewer calls), and modular edge functions respectively.
 
 5) Future extensions planned during mentorship
 
-* Portfolio-level correlation modelling
-* Real-time parametric alerts (webhook-based triggers)
-* Direct GDAL-backed satellite band processing
-* Integration with BigQuery / ecosystem datasets
-* Time-series hazard trends (5-10 year lookback)
+   * Portfolio-level correlation modelling
+   * Real-time parametric alerts (webhook-based triggers)
+   * Direct GDAL-backed satellite band processing
+   * Integration with BigQuery / ecosystem datasets
+   * Time-series hazard trends (5-10 year lookback)
   
 
 <!--
