@@ -81,36 +81,43 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">15+ Satellite Data Feeds</DialogTitle>
+                  <DialogTitle className="text-2xl">18 Satellite Data Feeds</DialogTitle>
                   <DialogDescription className="text-base pt-2">
                     Comprehensive multi-source satellite data integration
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 pt-2">
                   <p className="text-sm text-muted-foreground">
-                    GRIT integrates data from multiple satellite sources to provide comprehensive, real-time climate risk assessment:
+                    GRIT integrates data from 18 specific satellite sources to provide comprehensive, real-time climate risk assessment:
                   </p>
                   
-                  <div className="space-y-3">
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">NASA & NOAA Climate Satellites</h4>
-                      <p className="text-sm text-muted-foreground">MODIS, VIIRS, GOES-R series for temperature, precipitation, and atmospheric conditions</p>
-                    </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-sm">NASA & NOAA Satellites (6)</h4>
+                    <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+                      <li>• <a href="https://modis.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">MODIS (Terra & Aqua)</a> - Thermal anomalies, vegetation indices</li>
+                      <li>• <a href="https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">VIIRS (JPSS)</a> - Nighttime fires, atmospheric conditions</li>
+                      <li>• <a href="https://www.goes-r.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">GOES-R (GOES-16/17/18)</a> - Real-time weather, lightning detection</li>
+                      <li>• <a href="https://gpm.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">GPM</a> - Global precipitation measurement</li>
+                      <li>• <a href="https://icesat-2.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ICESat-2</a> - Elevation data, vegetation structure</li>
+                      <li>• <a href="https://landsat.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Landsat 8/9</a> - Long-term land cover change</li>
+                    </ul>
                     
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">ESA Copernicus Program</h4>
-                      <p className="text-sm text-muted-foreground">Sentinel-1 (SAR for flood detection), Sentinel-2 (multispectral imagery), Sentinel-3 (ocean/land monitoring)</p>
-                    </div>
+                    <h4 className="font-semibold text-sm pt-2">ESA Copernicus Program (6)</h4>
+                    <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+                      <li>• <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-1" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sentinel-1A/B</a> - SAR for all-weather flood detection</li>
+                      <li>• <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sentinel-2A/B</a> - 10m multispectral imagery</li>
+                      <li>• <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-3" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sentinel-3A/B</a> - Ocean/land temperature monitoring</li>
+                    </ul>
                     
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Commercial High-Resolution Imagery</h4>
-                      <p className="text-sm text-muted-foreground">Planet Labs, Maxar for detailed infrastructure mapping and change detection</p>
-                    </div>
-                    
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Specialized Climate Data</h4>
-                      <p className="text-sm text-muted-foreground">GPM (precipitation), GRACE (water storage), ICESat-2 (elevation/vegetation)</p>
-                    </div>
+                    <h4 className="font-semibold text-sm pt-2">Commercial & Specialized (6)</h4>
+                    <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+                      <li>• <a href="https://www.planet.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Planet Labs Dove Constellation</a> - Daily 3-5m imagery</li>
+                      <li>• <a href="https://www.maxar.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Maxar WorldView-3</a> - High-resolution infrastructure mapping</li>
+                      <li>• <a href="https://earth.esa.int/eogateway/missions/smap" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">SMAP</a> - Soil moisture for drought detection</li>
+                      <li>• <a href="https://gracefo.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">GRACE-FO</a> - Groundwater storage changes</li>
+                      <li>• <a href="https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/dscovr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">DSCOVR</a> - Space weather monitoring</li>
+                      <li>• <a href="https://www.eumetsat.int/meteosat-third-generation" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Meteosat Third Generation</a> - European weather monitoring</li>
+                    </ul>
                   </div>
                   
                   <div className="pt-3 border-t">
