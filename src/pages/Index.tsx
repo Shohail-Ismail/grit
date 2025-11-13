@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Droplets, Flame, Wind, Sun, Download, Home } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Droplets, Flame, Wind, Sun, Download, Home, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
 import LocationInput from "@/components/LocationInput";
@@ -10,6 +11,7 @@ import RiskChart from "@/components/RiskChart";
 import InteractiveKPISection from "@/components/InteractiveKPISection";
 import TransparencyPanel from "@/components/TransparencyPanel";
 import Footer from "@/components/Footer";
+import { useAuth } from "@/hooks/useAuth";
 
 import { downloadCSV } from "@/utils/csvExport";
 import { toast } from "sonner";
@@ -29,6 +31,19 @@ interface RiskData {
 const Index = () => {
   const [riskData, setRiskData] = useState<RiskData | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const { user, session, loading, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/auth');
+  };
 
   const analyzeLocation = async (lat: number, lng: number) => {
     setIsAnalyzing(true);
@@ -42,6 +57,7 @@ const Index = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token}`,
           },
           body: JSON.stringify({ latitude: lat, longitude: lng }),
         }
@@ -87,8 +103,23 @@ const Index = () => {
     });
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <div className="container mx-auto px-4 py-4 flex justify-end">
+        <Button onClick={handleSignOut} variant="outline" size="sm">
+          <LogOut className="mr-2 h-4 w-4" />
+          Sign Out
+        </Button>
+      </div>
+      
       <Hero onGetStarted={scrollToAnalysis} />
       
       <main className="container mx-auto px-4 py-12 space-y-12 flex-1">
