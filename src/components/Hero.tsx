@@ -125,11 +125,11 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
                       <Info className="h-4 w-4 text-primary" />
                       Why These Sources?
                     </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Each satellite provides unique capabilities: optical for visual assessment, SAR for all-weather monitoring, 
-                      thermal for heat detection, and multispectral for vegetation health. This redundancy ensures continuous coverage 
-                      and cross-validation, critical for accurate parametric insurance triggers.
-                    </p>
+                  <p className="text-sm text-muted-foreground">
+                    Each satellite provides unique capabilities: optical for visual assessment, SAR for all-weather monitoring, 
+                    thermal for heat detection, and multispectral for vegetation health. This redundancy ensures continuous coverage 
+                    and cross-validation, critical for accurate parametric insurance triggers.
+                  </p>
                   </div>
                 </div>
               </DialogContent>
@@ -138,56 +138,56 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer group flex flex-col items-center justify-center min-h-[120px]">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">&lt;3s</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">&lt;5s</div>
                   <div className="text-sm md:text-base text-white/80 flex items-center justify-center gap-1 text-center">
-                    Real-time Analysis
+                    API Response Time
                     <Info className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">Real-time Analysis: Under 3 Seconds</DialogTitle>
+                  <DialogTitle className="text-2xl">API Response Time: Under 5 Seconds</DialogTitle>
                   <DialogDescription className="text-base pt-2">
-                    Instant risk assessment with sub-second latency architecture
+                    Serverless architecture for rapid risk assessment queries
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 pt-2">
                   <p className="text-sm text-muted-foreground">
-                    GRIT delivers comprehensive climate risk analysis in under 3 seconds through cutting-edge real-time processing:
+                    GRIT delivers climate risk analysis through efficient serverless edge functions:
                   </p>
                   
                   <div className="space-y-3">
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Pre-Computed Risk Indices</h4>
-                      <p className="text-sm text-muted-foreground">Global risk surfaces pre-calculated and cached at multiple resolutions, enabling instant lookup for any coordinate worldwide</p>
+                      <h4 className="font-semibold mb-1">Serverless Edge Functions</h4>
+                      <p className="text-sm text-muted-foreground">Deployed on global infrastructure that scales automatically based on demand, reducing cold start times and ensuring consistent performance</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Edge-Optimized Architecture</h4>
-                      <p className="text-sm text-muted-foreground">Distributed globally across 200+ edge locations with sub-50ms response times, ensuring low latency regardless of user location</p>
+                      <h4 className="font-semibold mb-1">Cached Satellite Data Access</h4>
+                      <p className="text-sm text-muted-foreground">Pre-indexed geospatial data from NASA, ESA, and NOAA sources enables rapid coordinate-based queries without processing raw satellite imagery</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Streaming Data Pipeline</h4>
-                      <p className="text-sm text-muted-foreground">Satellite feeds processed in real-time as they arrive, with risk models updated every 15 minutes without requiring user refresh</p>
+                      <h4 className="font-semibold mb-1">Efficient Risk Algorithms</h4>
+                      <p className="text-sm text-muted-foreground">Optimised computational models that balance accuracy with speed, using proven climate science methodologies validated against historical disaster data</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Parallel GPU Processing</h4>
-                      <p className="text-sm text-muted-foreground">Multiple risk factors analyzed simultaneously using hardware acceleration, reducing complex calculations from minutes to milliseconds</p>
+                      <h4 className="font-semibold mb-1">JSON-based Data Delivery</h4>
+                      <p className="text-sm text-muted-foreground">Lightweight response payloads containing only essential risk metrics, minimising network transfer time and enabling fast client-side rendering</p>
                     </div>
                   </div>
                   
                   <div className="pt-3 border-t">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
                       <Info className="h-4 w-4 text-primary" />
-                      Why Real-time Matters
+                      Why Response Speed Matters
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      In emergency situations, every second counts. Real-time analysis enables immediate decision-making for insurance underwriting, 
-                      emergency response coordination, and live disaster monitoring. Our architecture ensures that critical risk data is always 
-                      current and instantly accessible, providing the responsiveness needed for parametric insurance triggers and crisis management.
+                      Fast API responses enable insurance underwriters to assess properties in real-time during client consultations. 
+                      Sub-5-second queries mean risk assessments can be performed at scale during portfolio analysis without workflow delays. 
+                      Our architecture prioritises reliability and consistency over peak performance claims.
                     </p>
                   </div>
                 </div>
@@ -224,7 +224,7 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
                       <h4 className="font-semibold mb-1">Sentinel-2 Foundation</h4>
-                      <p className="text-sm text-muted-foreground">Based on ESA Sentinel-2 multispectral imagery (10m bands), validated against higher-resolution commercial imagery (0.5-3m) and DEMs</p>
+                      <p className="text-sm text-muted-foreground">Based on ESA Sentinel-2 multispectral imagery (10m bands), validated against higher-resolution commercial imagery (0.5-3m) and digital elevation models</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
