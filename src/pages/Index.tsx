@@ -51,14 +51,24 @@ const Index = () => {
     toast.info("Analyzing location with real-time data...");
     
     try {
-      // Call the backend function using Supabase client
-      const { data, error } = await supabase.functions.invoke('analyze-location', {
-        body: { latitude: lat, longitude: lng },
-      });
+      // Call the public backend function without authentication
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-location`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ latitude: lat, longitude: lng }),
+        }
+      );
 
-      if (error) {
-        throw new Error(error.message || 'Failed to fetch risk data');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to fetch risk data');
       }
+
+      const data = await response.json();
       
       setRiskData({
         latitude: data.latitude,
