@@ -8,9 +8,9 @@
 
 ## Description
 
-> Prototype built in 24 hours for the MIT Sloan AI Club x Google Cloud x OpenAI Hack-Nation Global Hackathon
-> - Placed 3rd (VC track) out of >2800 participants
-> - Selected as 1 of 15 ventures to receive mentorship from Stanford, Harvard, and Microsoft to develop and scale idea (ongoing)
+Prototype built in 24 hours using Lovable and Google Cloud for the MIT SloanxOpenAI Hack-Nation Global Hackathon
+- Placed 3rd (VC track) out of >2800 participants
+- Selected as 1 of 15 ventures to receive mentorship from Stanford, Harvard, and Microsoft to develop and scale idea (ongoing)
 
 GRIT is a rapid-response climate risk assessment tool for insurance, reinsurance, and catastrophe-modelling teams It delivers sub-10m geospatial analysis, <60-second risk scoring, and parametric payout estimates, combining satellite imagery, climate feeds, and a lightweight geospatial backend
 
