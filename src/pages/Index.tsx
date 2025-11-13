@@ -13,6 +13,7 @@ import InteractiveKPISection from "@/components/InteractiveKPISection";
 import TransparencyPanel from "@/components/TransparencyPanel";
 import Footer from "@/components/Footer";
 import CalculationMethodology from "@/components/CalculationMethodology";
+import QuickStats from "@/components/QuickStats";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -155,7 +156,7 @@ const Index = () => {
               </div>
               
               <div className="grid gap-6 lg:grid-cols-3">
-                <div className="lg:col-span-1">
+                <div className="lg:col-span-1 space-y-6">
                   <RiskScoreDisplay
                     overallScore={riskData.overallScore}
                     latitude={riskData.latitude}
@@ -188,6 +189,8 @@ const Index = () => {
                       }
                     }}
                   />
+                  
+                  <QuickStats factors={riskData.factors} />
                 </div>
                 
                 <div className="lg:col-span-2">
