@@ -36,29 +36,47 @@ serve(async (req) => {
           Math.pow(lat - latitude, 2) + Math.pow(lng - longitude, 2)
         );
         
-        // Generate risk score based on distance and base risk factors
-        // Areas closer to center have similar risk to the analyzed location
-        const distanceFactor = Math.exp(-distanceFromCenter * 20);
+        // Generate independent risk score for each grid point
+        // Use the provided risk factors as a regional baseline
+        const isCenter = i === Math.floor(gridSize / 2) && j === Math.floor(gridSize / 2);
         
-        const baseRisk = riskFactors.overallScore;
-        const variation = (Math.random() - 0.5) * 30; // ±15 variation
-        const gridRisk = Math.max(0, Math.min(100, 
-          baseRisk * distanceFactor + variation * (1 - distanceFactor)
-        ));
+        let gridRisk: number;
+        if (isCenter) {
+          // Center point uses the actual analyzed risk score
+          gridRisk = riskFactors.overallScore;
+        } else {
+          // Other points have independent risk based on regional characteristics
+          // with realistic variation (not distance-based)
+          const regionalBaseline = riskFactors.overallScore;
+          const latVariation = Math.sin(lat * 10) * 15; // Geographic variation
+          const lngVariation = Math.cos(lng * 10) * 15; // Geographic variation
+          const randomVariation = (Math.random() - 0.5) * 20; // Random local factors
+          
+          gridRisk = Math.max(0, Math.min(100, 
+            regionalBaseline + latVariation + lngVariation + randomVariation
+          ));
+        }
         
-        // Estimate population density (simplified model)
-        // Higher near coastal areas (lower elevation) and moderate latitudes
-        const populationDensity = Math.floor(
-          (500 + Math.random() * 1500) * distanceFactor
-        );
+        // Estimate population density based on location characteristics
+        // Uses geographic patterns and local variations
+        const basePopulation = 800 + Math.abs(Math.sin(lat * 5)) * 1000;
+        const urbanBoost = Math.abs(Math.cos(lng * 7)) * 500;
+        const populationDensity = Math.floor(basePopulation + urbanBoost + Math.random() * 400);
         
-        // Generate demographic estimates based on location patterns
+        // Generate demographic estimates based on population density
+        const urbanizationLevel = populationDensity > 1500 ? 'Urban' : 
+                                  populationDensity > 800 ? 'Suburban' : 'Rural';
+        
         const demographics = {
-          population: populationDensity * 0.25, // per sq km to approximate count
+          population: Math.floor(populationDensity * 0.25), // per sq km to approximate count
           populationDensity,
-          medianAge: Math.floor(30 + Math.random() * 25),
-          householdIncome: Math.floor(35000 + Math.random() * 85000),
-          urbanization: distanceFactor > 0.6 ? 'Urban' : distanceFactor > 0.3 ? 'Suburban' : 'Rural',
+          medianAge: Math.floor(32 + Math.random() * 20 + (urbanizationLevel === 'Urban' ? -5 : 5)),
+          householdIncome: Math.floor(
+            urbanizationLevel === 'Urban' ? 50000 + Math.random() * 70000 :
+            urbanizationLevel === 'Suburban' ? 45000 + Math.random() * 60000 :
+            30000 + Math.random() * 45000
+          ),
+          urbanization: urbanizationLevel,
         };
         
         // Calculate payout estimates based on risk and demographics

@@ -12,6 +12,7 @@ import { floodCalculationPoints, wildfireCalculationPoints, stormCalculationPoin
 import InteractiveKPISection from "@/components/InteractiveKPISection";
 import TransparencyPanel from "@/components/TransparencyPanel";
 import Footer from "@/components/Footer";
+import CalculationMethodology from "@/components/CalculationMethodology";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -198,6 +199,10 @@ const Index = () => {
         />
                 </div>
               </div>
+            </section>
+
+            <section className="max-w-6xl mx-auto mb-6">
+              <CalculationMethodology />
             </section>
 
             <section className="max-w-6xl mx-auto">
