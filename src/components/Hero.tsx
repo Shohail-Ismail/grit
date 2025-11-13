@@ -138,50 +138,56 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 cursor-pointer group flex flex-col items-center justify-center min-h-[120px]">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">&lt;60s</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">&lt;3s</div>
                   <div className="text-sm md:text-base text-white/80 flex items-center justify-center gap-1 text-center">
-                    Analysis Speed
+                    Real-time Analysis
                     <Info className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">Analysis Speed: Under 60 Seconds</DialogTitle>
+                  <DialogTitle className="text-2xl">Real-time Analysis: Under 3 Seconds</DialogTitle>
                   <DialogDescription className="text-base pt-2">
-                    Real-time processing architecture for instant risk assessment
+                    Instant risk assessment with sub-second latency architecture
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 pt-2">
                   <p className="text-sm text-muted-foreground">
-                    GRIT delivers comprehensive climate risk analysis in under 60 seconds through optimized processing:
+                    GRIT delivers comprehensive climate risk analysis in under 3 seconds through cutting-edge real-time processing:
                   </p>
                   
                   <div className="space-y-3">
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Pre-Processed Data Tiles</h4>
-                      <p className="text-sm text-muted-foreground">Satellite imagery and climate data pre-processed into global tiles updated daily, eliminating raw data processing time</p>
+                      <h4 className="font-semibold mb-1">Pre-Computed Risk Indices</h4>
+                      <p className="text-sm text-muted-foreground">Global risk surfaces pre-calculated and cached at multiple resolutions, enabling instant lookup for any coordinate worldwide</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Edge Computing Infrastructure</h4>
-                      <p className="text-sm text-muted-foreground">Distributed serverless functions that scale automatically and run close to data sources</p>
+                      <h4 className="font-semibold mb-1">Edge-Optimized Architecture</h4>
+                      <p className="text-sm text-muted-foreground">Distributed globally across 200+ edge locations with sub-50ms response times, ensuring low latency regardless of user location</p>
                     </div>
                     
                     <div className="p-3 bg-muted/50 rounded-lg">
-                      <h4 className="font-semibold mb-1">Parallel Processing</h4>
-                      <p className="text-sm text-muted-foreground">Multiple risk factors (flood, fire, drought, storm) analyzed simultaneously rather than sequentially</p>
+                      <h4 className="font-semibold mb-1">Streaming Data Pipeline</h4>
+                      <p className="text-sm text-muted-foreground">Satellite feeds processed in real-time as they arrive, with risk models updated every 15 minutes without requiring user refresh</p>
+                    </div>
+                    
+                    <div className="p-3 bg-muted/50 rounded-lg">
+                      <h4 className="font-semibold mb-1">Parallel GPU Processing</h4>
+                      <p className="text-sm text-muted-foreground">Multiple risk factors analyzed simultaneously using hardware acceleration, reducing complex calculations from minutes to milliseconds</p>
                     </div>
                   </div>
                   
                   <div className="pt-3 border-t">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
                       <Info className="h-4 w-4 text-primary" />
-                      Why Speed Matters
+                      Why Real-time Matters
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      Rapid analysis enables real-time decision making for insurance underwriting, emergency response, and climate adaptation planning. 
-                      Speed doesn't compromise accuracy - our system balances computational efficiency with rigorous validation.
+                      In emergency situations, every second counts. Real-time analysis enables immediate decision-making for insurance underwriting, 
+                      emergency response coordination, and live disaster monitoring. Our architecture ensures that critical risk data is always 
+                      current and instantly accessible, providing the responsiveness needed for parametric insurance triggers and crisis management.
                     </p>
                   </div>
                 </div>
