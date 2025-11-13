@@ -65,22 +65,22 @@ App runs at:
 
 ## Guide
 
-1 Enter a location in the frontend
+1) Enter a location in the frontend
    GRIT builds a 7x7 geospatial grid and fetches climate, demographic, and satellite features
 
-2 Edge Functions run hazard modules:
+2) Edge Functions run hazard modules:
 
    * Flood (Sentinel-1 SAR change detection)
    * Wildfire (Sentinel-2 NBR/dNBR)
    * Storm / drought (Open-Meteo + short-term conditions)
 
-3 Risk algorithm calculates:
+3) Risk algorithm calculates:
 
    * Hazard severity
    * Exposure (population x urbanisation weighting)
    * Parametric payout ranges (expected, 75th, 90th, PML)
 
-4 Frontend displays:
+4) Frontend displays:
 
    * Interactive heatmap (Leaflet + heat layer)
    * Metric breakdowns (Recharts)
@@ -90,7 +90,7 @@ App runs at:
 
 ## Future Development
 
-### 1 Satellite methods are production-aligned
+1) Satellite methods are production-aligned
 
 The SAR and NBR pipelines follow standard remote-sensing practice:
 
@@ -99,13 +99,13 @@ The SAR and NBR pipelines follow standard remote-sensing practice:
 
 These methods are simplified for serverless limits but retain the correct scientific structure
 
-### 2 Data pipeline designed for real underwriting workflows
+2) Data pipeline designed for real underwriting workflows
 
 * Supabase PostGIS stores analysis results, enabling multi-location queries
 * pg_cron supports scheduled ingestion for near-real-time updates
 * GeoTIFF/Shapefile export allows integration with internal GIS systems
 
-### 3 Scoring model intentionally transparent
+3) Scoring model intentionally transparent
 
 Recruiters and risk teams favour explainability over black box ML
 GRIT uses clear, auditable components:
@@ -115,7 +115,7 @@ GRIT uses clear, auditable components:
 * exponential severity scaling (`riskFactor^12`)
 * percentile-based payout estimates
 
-### 4 Built for speed, reliability, and handover
+4) Built for speed, reliability, and handover
 
 During the hackathon, major constraints included:
 
@@ -129,7 +129,7 @@ The solution is in:
 * request batching (85% fewer calls)
 * clean modular edge functions suitable for rewrite/re-deployment
 
-### 5 Future extensions planned during mentorship
+5) Future extensions planned during mentorship
 
 * Portfolio-level correlation modelling
 * Real-time parametric alerts (webhook-based triggers)
