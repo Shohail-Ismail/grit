@@ -36,6 +36,7 @@ export type Database = {
           shapefile_url: string | null
           thumbnail_url: string | null
           updated_at: string | null
+          user_id: string | null
         }
         Insert: {
           acquisition_date_post?: string | null
@@ -58,6 +59,7 @@ export type Database = {
           shapefile_url?: string | null
           thumbnail_url?: string | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Update: {
           acquisition_date_post?: string | null
@@ -80,6 +82,7 @@ export type Database = {
           shapefile_url?: string | null
           thumbnail_url?: string | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -96,6 +99,7 @@ export type Database = {
           source: string | null
           temperature: number | null
           updated_at: string | null
+          user_id: string | null
           vegetation_index: number | null
           water_index: number | null
         }
@@ -111,6 +115,7 @@ export type Database = {
           source?: string | null
           temperature?: number | null
           updated_at?: string | null
+          user_id?: string | null
           vegetation_index?: number | null
           water_index?: number | null
         }
@@ -126,6 +131,7 @@ export type Database = {
           source?: string | null
           temperature?: number | null
           updated_at?: string | null
+          user_id?: string | null
           vegetation_index?: number | null
           water_index?: number | null
         }
