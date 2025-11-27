@@ -21,19 +21,17 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
   const worstCase = Math.floor(baseExposure * (overallScore / 100) * 1.5);
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 0,
     }).format(value);
   };
 
   return (
     <section className="max-w-6xl mx-auto space-y-6">
-      <h3 className="text-2xl font-bold text-foreground text-center">
-        Key Performance Indicators
-      </h3>
-      
+      <h3 className="text-2xl font-bold text-foreground text-center">Key Performance Indicators</h3>
+
       <div className="grid gap-6 md:grid-cols-2">
         <Dialog>
           <DialogTrigger asChild>
@@ -74,8 +72,9 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
             </DialogHeader>
             <div className="space-y-4 pt-2">
               <p className="text-sm text-muted-foreground">
-                This metric identifies the types and quantities of infrastructure exposed to climate risks in the analyzed area. 
-                It includes residential properties, commercial buildings, and agricultural land that could be impacted by environmental hazards.
+                This metric identifies the types and quantities of infrastructure exposed to climate risks in the
+                analyzed area. It includes residential properties, commercial buildings, and agricultural land that
+                could be impacted by environmental hazards.
               </p>
               <div className="pt-3 border-t">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
@@ -83,8 +82,8 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                   Data Source
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  Based on open geospatial databases and land use classifications. These values are representative estimates 
-                  for educational purposes and may not reflect exact current conditions.
+                  Based on open geospatial databases and land use classifications. These values can fluctuate based on
+                  data quality/frequency and may not reflect exact current conditions.
                 </p>
               </div>
             </div>
@@ -130,8 +129,9 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
             </DialogHeader>
             <div className="space-y-4 pt-2">
               <p className="text-sm text-muted-foreground">
-                These percentiles represent the statistical distribution of potential insurance payouts based on historical event severity. 
-                The 25th percentile indicates smaller, more frequent events, while the 75th percentile represents larger but less common occurrences.
+                These percentiles represent the statistical distribution of potential insurance payouts based on
+                historical event severity. The 25th percentile indicates smaller, more frequent events, while the 75th
+                percentile represents larger but less common occurrences.
               </p>
               <div className="pt-3 border-t">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
@@ -139,8 +139,9 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                   Calculation Method
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  Estimated using risk score modeling and base exposure values. These are approximations for educational purposes 
-                  and should not be used for actual insurance underwriting or financial planning.
+                  Estimated using risk score modelling and base exposure values. This range provides a realistic
+                  expectation for planning and budgeting purposes. Most actual events will fall within this range,
+                  making it useful for understanding typical risk exposure.
                 </p>
               </div>
             </div>
@@ -159,12 +160,8 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                     <h4 className="font-semibold text-card-foreground">Worst-Case Exposure</h4>
                     <Info className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
-                  <div className="text-3xl font-bold text-chart-3 mb-2">
-                    {formatCurrency(worstCase)}
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Maximum potential loss in catastrophic event
-                  </p>
+                  <div className="text-3xl font-bold text-chart-3 mb-2">{formatCurrency(worstCase)}</div>
+                  <p className="text-sm text-muted-foreground">Maximum potential loss in catastrophic event</p>
                 </div>
               </div>
             </Card>
@@ -178,8 +175,9 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
             </DialogHeader>
             <div className="space-y-4 pt-2">
               <p className="text-sm text-muted-foreground">
-                This represents the maximum potential financial loss in a catastrophic event scenario. It models the impact 
-                of extreme climate events occurring simultaneously or in rapid succession, representing tail-risk exposure.
+                This represents the maximum potential financial loss in a catastrophic event scenario. It models the
+                impact of extreme climate events occurring simultaneously or in rapid succession, representing tail-risk
+                exposure.
               </p>
               <div className="pt-3 border-t">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
@@ -187,8 +185,8 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                   Risk Context
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  While worst-case scenarios are unlikely, understanding maximum exposure is crucial for comprehensive risk management. 
-                  This value combines multiple risk factors at their highest severity levels.
+                  While worst-case scenarios are unlikely, understanding maximum exposure is crucial for comprehensive
+                  risk management. This value combines multiple risk factors at their highest severity levels.
                 </p>
               </div>
             </div>
@@ -210,9 +208,7 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                   <div className="text-2xl font-bold text-card-foreground mb-2">
                     {formatCurrency(percentile25)} - {formatCurrency(percentile75)}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Expected range for typical events
-                  </p>
+                  <p className="text-sm text-muted-foreground">Expected range for typical events</p>
                 </div>
               </div>
             </Card>
@@ -226,8 +222,9 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
             </DialogHeader>
             <div className="space-y-4 pt-2">
               <p className="text-sm text-muted-foreground">
-                This range represents the expected payout values for typical climate-related events in this location. 
-                It spans from the 25th to 75th percentile, capturing the most common severity levels while excluding outlier extremes.
+                This range represents the expected payout values for typical climate-related events in this location. It
+                spans from the 25th to 75th percentile, capturing the most common severity levels while excluding
+                outlier extremes.
               </p>
               <div className="pt-3 border-t">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
@@ -235,8 +232,8 @@ const InteractiveKPISection = ({ overallScore }: InteractiveKPISectionProps) => 
                   Practical Use
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  This range provides a realistic expectation for planning and budgeting purposes. Most actual events will fall 
-                  within this range, making it useful for understanding typical risk exposure.
+                  This range provides a realistic expectation for planning and budgeting purposes. Most actual events
+                  will fall within this range, making it useful for understanding typical risk exposure.
                 </p>
               </div>
             </div>
