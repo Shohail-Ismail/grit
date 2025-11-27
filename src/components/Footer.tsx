@@ -10,6 +10,10 @@ const Footer = () => {
             <p>Built on transparent AI principles - every claim and every score is explainable!</p>
           </div>
           <p className="font-medium">MITxOpenAI HackNation 2025 Prototype</p>
+          <p className="font-medium">
+            Risk scores are demonstrative approximates with inherent uncertainty and should not be the sole basis used
+            for financial decisions.
+          </p>
         </div>
         <p className="text-center text-sm text-muted-foreground/80 mt-4">
           Made with Love(able) by Shohail Ismail + Chinmay Sharma
