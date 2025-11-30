@@ -19,6 +19,8 @@ Prototype built in 24 hours using Lovable and Google Cloud for [MITxOpenAI Hack-
 
 ---
 
+
+# THIS ENTIRE THING MUST BE REDONE FOR GRIT'S RECENT UPDATES -- SHOHAIL WILL DO BY EOD (30/11) AFTER GIVING CHINMAY THE FOUNDATION OF PROJECT RESITE
 <br>
 
 ![GRIT Homepage](public/home.jpg)
